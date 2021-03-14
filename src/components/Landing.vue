@@ -22,19 +22,13 @@
               rounded="lg"
               min-height="268"
             >
-              <v-card>
+              <v-card @click="$router.push({name: 'search'})">
                 <v-img
                   height="268px"
-                  src="https://cdn.pixabay.com/photo/2018/08/13/17/20/shooting-star-3603455__340.jpg"
+                  src="https://cdn.pixabay.com/photo/2016/09/03/19/35/griffith-observatory-1642514_960_720.jpg"
                 >
 
                   <v-card-title class="white--text mt-8">
-                    <v-avatar size="56">
-                      <img
-                        alt="user"
-                        src="https://cdn.pixabay.com/photo/2012/10/26/02/38/asteroid-63125__340.jpg"
-                      >
-                    </v-avatar>
                     <img class="mx-auto" src="../assets/searchall.png">
                   </v-card-title>
                 </v-img>
@@ -50,19 +44,13 @@
               min-height="268"
               rounded="lg"
             >
-              <v-card>
+              <v-card @click="$router.push({name: 'about'})">
                 <v-img
                   height="268px"
                   src="https://cdn.pixabay.com/photo/2017/01/31/13/40/dark-2024127_960_720.png"
                 >
 
                   <v-card-title class="white--text mt-8">
-                    <v-avatar size="56">
-                      <img
-                        alt="user"
-                        src="https://cdn.pixabay.com/photo/2012/10/26/02/38/asteroid-63125__340.jpg"
-                      >
-                    </v-avatar>
                     <img class="mx-auto" src="../assets/allfatal.png">
                   </v-card-title>
                 </v-img>
@@ -78,22 +66,16 @@
               rounded="lg"
               min-height="268"
             >
-              <v-card>
+              <v-card @click="$router.push({name: 'observations'})">
                 <v-img
                   height="268px"
                   src="https://cdn.pixabay.com/photo/2020/09/05/19/38/landscape-5547401__340.png"
                 >
 
                   <v-card-title class="white--text mt-8">
-                    <v-avatar size="56">
-                      <img
-                        alt="user"
-                        src="https://cdn.pixabay.com/photo/2012/10/26/02/38/asteroid-63125__340.jpg"
-                      >
-                    </v-avatar>
-                    <p class="ml-5">
-                      Information
-                    </p>
+                    <v-card-title class="white--text mt-n2">
+                      <img class="mx-auto" src="../assets/observations.png">
+                    </v-card-title>
                   </v-card-title>
                 </v-img>
               </v-card>

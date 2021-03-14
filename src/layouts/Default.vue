@@ -1,9 +1,9 @@
 <template>
   <v-app>
     <v-app-bar app>
-      <v-toolbar-title class="headline text-uppercase">
-        <span>AHH</span>
-        <span class="font-weight-light">STEROID</span>
+      <v-toolbar-title class="headline text-uppercase" @click="$router.push({name: 'home'})">
+        <span class="cursor">AHH</span>
+        <span class="font-weight-light cursor">STEROID</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn
@@ -25,7 +25,13 @@
 export default {
   name: 'Default',
   created () {
-    this.$vuetify.theme.dark = true // easy integration for app wide darkmode :) or can be used by component for individual styled views
+    this.$vuetify.theme.dark = true // easy integration for app wide darkmode or can be used by component for individual styled views
   },
 };
 </script>
+<style>
+  .cursor:hover {
+    cursor: pointer;
+  }
+</style>
+

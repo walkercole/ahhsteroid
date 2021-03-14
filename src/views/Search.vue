@@ -77,12 +77,20 @@
     :headers="headers"
     :items="list"
     :items-per-page="8"
+    :expanded.sync="expanded"
+    show-expand
     class="elevation-1"
-  ></v-data-table>
+    >
+      <template v-slot:expanded-item="{ headers, item }">
+        <td :colspan="headers.length">
+          Write observations for {{ item.name }} :
+          <v-text-field v-model="item.description" @change="updateStore(item.description, item.id)"></v-text-field>
+        </td>
+      </template>
+    </v-data-table>
 
   </layout>
 </template>
-
 <script>
 import layout from '../layouts/Default.vue'
 import baseApiUrl from '../config'
@@ -90,7 +98,7 @@ import key from '../config'
 import axios from 'axios'
 
 export default {
-  name: 'about',
+  name: 'search',
   components: {
     layout
   },
@@ -107,6 +115,7 @@ export default {
       endMenu: false,
       asteroids: [],
       list: [],
+      expanded: [],
       headers: [
         {
           text: 'Name',
@@ -150,6 +159,10 @@ export default {
     console.log(key)
   },
   methods: {
+    updateStore(value, id){
+      this.$store.commit('addObservation', { id: id, description: value})
+      console.log(value, id)
+    },
     searchAtmo(){
       console.log(this.startDate, this.endDate)
       axios

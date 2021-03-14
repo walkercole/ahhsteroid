@@ -74,11 +74,11 @@
       </v-btn>
     </v-snackbar>
     <div>What is the absolute magnitude of our sun? An asteroid's absolute magnitude is the visual magnitude an observer would record if the asteroid were placed 1 Astronomical Unit (au) away, and 1 au from the Sun and at a zero phase angle.</div>
-    <v-card v-for="asteroid in asteroids" :key="asteroid.id">
+    <!-- <v-card v-for="asteroid in asteroids" :key="asteroid.id">
       <v-card-text v-for="cluster in asteroid" :key="cluster.id" class="my-2">
         <div>{{ cluster.id }} {{ cluster.name }} {{ cluster.is_potentially_hazardous_asteroid }} {{ cluster.absolute_magnitude_h }} {{ cluster.nasa_jpl_url }}  {{ cluster.estimated_diameter.meters.estimated_diameter_max }} </div>
       </v-card-text>
-    </v-card>
+    </v-card> -->
     <div v-for="asteroid in asteroids" :key="asteroid.id">
       <v-card width="400" v-for="cluster in asteroid" :key="cluster.id">
         <v-img
@@ -172,6 +172,11 @@ export default {
   methods: {
     searchAtmo(){
       console.log(this.startDate, this.endDate)
+
+      this.$store.commit('increment')
+      this.$store.commit('addObservation', { id: '1', description: 'whoa asteroids'})
+      console.log(this.$store.state.count)
+
       axios
         // .get(baseApiUrl.service.baseURL, {api_key: key.service.api_key, start_date: this.startDate, end_date: this.endDate})
         .get(baseApiUrl.service.baseURL + 'api_key='+`${key.service.api_key}` + '&' + 'start_date='+`${this.startDate}` + '&' + 'end_date='+`${this.endDate}`)

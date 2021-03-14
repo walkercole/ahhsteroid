@@ -23,6 +23,11 @@ export default new Router({
       path: '/search',
       name: 'search',
       component: () => import(/* webpackChunkName: "search" */ './views/Search.vue')
+    },
+    {
+      path: '/observations',
+      name: 'observations',
+      component: () => import(/* webpackChunkName: "observation" */ './views/Observations.vue')
     }
   ]
 })
