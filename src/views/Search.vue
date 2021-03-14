@@ -73,65 +73,12 @@
         Close
       </v-btn>
     </v-snackbar>
-    <div>What is the absolute magnitude of our sun? An asteroid's absolute magnitude is the visual magnitude an observer would record if the asteroid were placed 1 Astronomical Unit (au) away, and 1 au from the Sun and at a zero phase angle.</div>
-    <v-card v-for="asteroid in asteroids" :key="asteroid.id">
-      <v-card-text v-for="cluster in asteroid" :key="cluster.id" class="my-2">
-        <div>{{ cluster.id }} {{ cluster.name }} {{ cluster.is_potentially_hazardous_asteroid }} {{ cluster.absolute_magnitude_h }} {{ cluster.nasa_jpl_url }}  {{ cluster.estimated_diameter.meters.estimated_diameter_max }} </div>
-      </v-card-text>
-    </v-card>
-    <div v-for="asteroid in asteroids" :key="asteroid.id">
-      <v-card width="400" v-for="cluster in asteroid" :key="cluster.id">
-        <v-img
-          height="200px"
-          src="https://cdn.pixabay.com/photo/2016/05/01/21/20/earth-1365995_960_720.jpg"
-        >
-
-          <v-card-title class="white--text mt-8">
-            <v-avatar size="56">
-              <img
-                alt="user"
-                src="https://cdn.pixabay.com/photo/2012/10/26/02/38/asteroid-63125__340.jpg"
-              >
-            </v-avatar>
-            <p class="ml-5">
-              {{ cluster.name }}
-            </p>
-          </v-card-title>
-        </v-img>
-
-        <v-card-text>
-          <div class="font-weight-bold ml-8 mb-2">
-            Stats
-          </div>
-
-          <v-timeline
-            align-top
-            dense
-          >
-            <v-timeline-item
-              small
-            >
-              <div>
-                <div class="font-weight-normal">
-                  <strong>Potentially Fatal:</strong>
-                </div>
-                <div>{{ cluster.is_potentially_hazardous_asteroid }}</div>
-              </div>
-            </v-timeline-item>
-            <v-timeline-item
-              small
-            >
-              <div>
-                <div class="font-weight-normal">
-                  <strong>Absolute Magnitude:</strong>
-                </div>
-                <div>{{ cluster.absolute_magnitude_h }}</div>
-              </div>
-            </v-timeline-item>
-          </v-timeline>
-        </v-card-text>
-      </v-card>
-    </div>
+    <v-data-table
+    :headers="headers"
+    :items="list"
+    :items-per-page="8"
+    class="elevation-1"
+  ></v-data-table>
 
   </layout>
 </template>
@@ -158,11 +105,44 @@ export default {
       endDate: new Date().toISOString().substr(0, 10),
       startMenu: false,
       endMenu: false,
-      asteroids: []
+      asteroids: [],
+      list: [],
+      headers: [
+        {
+          text: 'Name',
+          align: 'start',
+          sortable: false,
+          value: 'name',
+        },
+        {
+          text: 'Absolute Magnitude',
+          align: 'start',
+          sortable: true,
+          value: 'absolute_magnitude_h',
+        },
+        {
+          text: 'Close Approach Date',
+          align: 'start',
+          sortable: true,
+          value: 'close_approach_data[0].close_approach_date_full',
+        },
+        {
+          text: 'Diameter (meters)',
+          align: 'start',
+          sortable: true,
+          value: 'estimated_diameter.meters.estimated_diameter_max',
+        },
+        {
+          text: 'Orbit Graph (link)',
+          align: 'start',
+          sortable: false,
+          value: 'nasa_jpl_url',
+        },
+      ],
     }
   },
   mounted () {
-
+    this.searchAtmo()
   },
   created () {
     this.$vuetify.theme.dark = true
@@ -178,6 +158,11 @@ export default {
         .then(response => {
           console.log(response.data.near_earth_objects)
           this.asteroids = response.data.near_earth_objects
+          console.log(this.asteroids)
+          for (var key in this.asteroids) {
+            this.list = this.asteroids[key]
+            console.log(this.list)
+          }
           console.log(this.asteroids)
           // this.info = response.data
         })

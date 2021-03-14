@@ -2,11 +2,11 @@
 
 const isProd = process.env.NODE_ENV === 'production'
 
-// import USER_KEY from '../config.env'
+const USER_KEY = process.env.USER_KEY
 
 const baseApiUrl = isProd ? 'http://localhost:8080' : 'https://api.nasa.gov/neo/rest/v1/feed?' 
 
-const key = '' 
+const key = process.env.VUE_APP_KEY 
 
 export default {
   service: {
@@ -24,7 +24,7 @@ export default {
     responseType: 'json'
   },
   storage: {
-    userKey: 'USER_KEY',
+    userKey: USER_KEY,
     userLikeKey: 'USER_LIKE_KEY'
   }
 }
