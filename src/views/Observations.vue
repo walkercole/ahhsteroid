@@ -53,7 +53,7 @@
                   align="center"
                   justify="end"
                 >
-                  <v-badge
+                  <!-- <v-badge
                     bordered
                     class="black--text"
                     color="purple"
@@ -67,7 +67,7 @@
                     >
                       more info
                     </v-btn>
-                  </v-badge>
+                  </v-badge> -->
                 </v-row>
               </v-list-item>
             </v-card-actions>

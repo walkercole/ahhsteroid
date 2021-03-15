@@ -33,13 +33,6 @@
       </v-btn>
       <v-spacer></v-spacer>
 
-      <v-btn
-        text
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-      >
-        <span class="mr-2">Latest Release</span>
-      </v-btn>
     </v-app-bar>
 
     <v-content>
