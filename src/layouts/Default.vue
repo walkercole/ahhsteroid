@@ -8,6 +8,33 @@
       <v-spacer></v-spacer>
       <v-btn
         text
+        @click="$router.push({name: 'search'})"
+        target="_blank"
+      >
+        <span class="mr-2">Daily Observer</span>
+      </v-btn>
+      <v-spacer></v-spacer>
+
+      <v-btn
+        text
+        @click="$router.push({name: 'about'})"
+        target="_blank"
+      >
+        <span class="mr-2">Hazardous asteroids</span>
+      </v-btn>
+      <v-spacer></v-spacer>
+
+      <v-btn
+        text
+        @click="$router.push({name: 'observations'})"
+        target="_blank"
+      >
+        <span class="mr-2">My Observations</span>
+      </v-btn>
+      <v-spacer></v-spacer>
+
+      <v-btn
+        text
         href="https://github.com/vuetifyjs/vuetify/releases/latest"
         target="_blank"
       >

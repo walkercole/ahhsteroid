@@ -1,94 +1,99 @@
 <template>
-  <layout justify-center>
-    <div :loading="loading">
-      <h3> {{ info }} </h3>
-    </div>
-    <v-layout row justify-center>
-      <!-- START DATE PICKER -->
-      <v-flex xs3 class="pr-4">
-        <v-menu
-          ref="startMenu"
-          v-model="startMenu"
-          :close-on-content-click="false"
-          :return-value.sync="startDate"
-          transition="scale-transition"
-          offset-y
-          full-width
-          min-width="290px"
+  <layout>
+    <v-container class="mx-auto">
+      <div :loading="loading">
+        <h3> {{ info }} </h3>
+      </div>
+      <v-row>
+        <div class="display-1">
+          Daily Observer <v-icon color="deep-purple accent-1">mdi-comment-edit-outline</v-icon>
+        </div>
+      </v-row>
+      <v-row>
+        <!-- START DATE PICKER -->
+        <v-spacer></v-spacer>
+        <v-col cols="2">
+          <v-menu
+            ref="startMenu"
+            v-model="startMenu"
+            :close-on-content-click="false"
+            :return-value.sync="startDate"
+            transition="scale-transition"
+            offset-y
+            min-width="290px"
+          >
+            <template v-slot:activator="{ on }">
+              <v-text-field
+                v-model="startDate"
+                label="Choose a day to observe"
+                readonly
+                color="deep-purple accent-1"
+                v-on="on"
+              ></v-text-field>
+            </template>
+            <v-date-picker v-model="startDate" no-title scrollable color="deep-purple accent-2">
+              <v-spacer></v-spacer>
+              <v-btn text color="primary" @click="startMenu = false">Cancel</v-btn>
+              <v-btn text color="primary" @click="$refs.startMenu.save(startDate)">OK</v-btn>
+            </v-date-picker>
+          </v-menu>
+          </v-col>
+          <v-col cols="1">
+            <v-btn
+              class="mt-2"
+              fab
+              dark
+              small
+              color="deep-purple accent-2"
+              @click="searchAtmo()"
+            >
+              <v-icon dark>
+                mdi-magnify
+              </v-icon>
+            </v-btn>
+          </v-col>
+          <v-spacer></v-spacer>
+        </v-row>
+      <v-row>
+        <v-data-table
+        :headers="headers"
+        :loading="loading"
+        loading-text="Loading... Please wait"
+        :items="list"
+        :items-per-page="8"
+        :expanded.sync="expanded"
+        show-expand
+        class="elevation-1 mx-auto"
         >
-          <template v-slot:activator="{ on }">
-            <v-text-field
-              v-model="startDate"
-              label="Choose a start date"
-              readonly
-              v-on="on"
-            ></v-text-field>
+          <template v-slot:expanded-item="{ headers, item }">
+            <td :colspan="headers.length">
+              Write observations for {{ item.name }} :
+              <v-text-field
+                v-model="item.description"
+                @change="updateStore(item.description, item.id, item.name)"
+                counter
+                maxlength="280"
+                ></v-text-field>
+            </td> 
           </template>
-          <v-date-picker v-model="startDate" no-title scrollable>
-            <v-spacer></v-spacer>
-            <v-btn text color="primary" @click="startMenu = false">Cancel</v-btn>
-            <v-btn text color="primary" @click="$refs.startMenu.save(startDate)">OK</v-btn>
-          </v-date-picker>
-        </v-menu>
-      </v-flex>
-      <!-- END DATE PICKER -->
-      <v-flex xs3 class="pl-4">
-        <v-menu
-          ref="endMenu"
-          v-model="endMenu"
-          :close-on-content-click="false"
-          :return-value.sync="endDate"
-          transition="scale-transition"
-          offset-y
-          full-width
-          min-width="290px"
-        >
-          <template v-slot:activator="{ on }">
-            <v-text-field
-              v-model="endDate"
-              label="Choose an end date"
-              readonly
-              v-on="on"
-            ></v-text-field>
-          </template>
-          <v-date-picker v-model="endDate" :min="startDate" no-title scrollable>
-            <v-spacer></v-spacer>
-            <v-btn text color="primary" @click="endMenu = false">Cancel</v-btn>
-            <v-btn text color="primary" @click="$refs.endMenu.save(endDate)">OK</v-btn>
-          </v-date-picker>
-        </v-menu>
-      </v-flex>
-      <v-btn @click="searchAtmo();" />
-    </v-layout>
 
-    <v-snackbar
-      v-model="snackbar"
-    >
-      {{ errMsg }}
-      <v-btn
-        color="pink"
-        text
-        @click="snackbar = false"
+        </v-data-table>
+
+      </v-row>
+
+      <v-snackbar
+        v-model="snackbar"
       >
-        Close
-      </v-btn>
-    </v-snackbar>
-    <v-data-table
-    :headers="headers"
-    :items="list"
-    :items-per-page="8"
-    :expanded.sync="expanded"
-    show-expand
-    class="elevation-1"
-    >
-      <template v-slot:expanded-item="{ headers, item }">
-        <td :colspan="headers.length">
-          Write observations for {{ item.name }} :
-          <v-text-field v-model="item.description" @change="updateStore(item.description, item.id)"></v-text-field>
-        </td>
-      </template>
-    </v-data-table>
-
+        {{ errMsg }}
+        <v-btn
+          color="pink"
+          text
+          @click="snackbar = false"
+        >
+          Close
+        </v-btn>
+      </v-snackbar>
+    </v-container>
   </layout>
 </template>
 <script>
@@ -155,29 +160,21 @@ export default {
   },
   created () {
     this.$vuetify.theme.dark = true
-    console.log(baseApiUrl)
-    console.log(key)
   },
   methods: {
-    updateStore(value, id){
-      this.$store.commit('addObservation', { id: id, description: value})
-      console.log(value, id)
+    updateStore(description, id, name){
+      this.$store.commit('addObservation', { id: id, name: name, description: description})
     },
     searchAtmo(){
-      console.log(this.startDate, this.endDate)
+      this.loading = true
       axios
-        // .get(baseApiUrl.service.baseURL, {api_key: key.service.api_key, start_date: this.startDate, end_date: this.endDate})
-        .get(baseApiUrl.service.baseURL + 'api_key='+`${key.service.api_key}` + '&' + 'start_date='+`${this.startDate}` + '&' + 'end_date='+`${this.endDate}`)
+        .get(baseApiUrl.service.baseURL + 'api_key='+`${key.service.api_key}` + '&' + 'start_date='+`${this.startDate}` + '&' + 'end_date='+`${this.startDate}`)
         .then(response => {
-          console.log(response.data.near_earth_objects)
           this.asteroids = response.data.near_earth_objects
-          console.log(this.asteroids)
+          this.list = []
           for (var key in this.asteroids) {
             this.list = this.asteroids[key]
-            console.log(this.list)
           }
-          console.log(this.asteroids)
-          // this.info = response.data
         })
         .catch(error => {
           console.error(error)

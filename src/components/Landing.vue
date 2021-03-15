@@ -1,6 +1,5 @@
 <template>
   <v-app id="inspire">
-    <!-- <v-main class="black img-bg lighten-3"> -->
       <v-container>
         <v-row>
             <img class="mx-auto" src="../assets/ahhsteroid-logo2.png">
@@ -10,7 +9,7 @@
             class="ma-2 mx-auto"
             color="deep-purple accent-2"
           >
-            Near Earth Object API app to monitor nearby asteroids 
+            Near Earth Object API app to observe nearby asteroids 
           </v-chip>
         </v-row>
         <v-row class="mt-12">
@@ -29,7 +28,7 @@
                 >
 
                   <v-card-title class="white--text mt-8">
-                    <img class="mx-auto" src="../assets/searchall.png">
+                    <img class="mx-auto" src="../assets/daily.png">
                   </v-card-title>
                 </v-img>
               </v-card>
@@ -51,7 +50,7 @@
                 >
 
                   <v-card-title class="white--text mt-8">
-                    <img class="mx-auto" src="../assets/allfatal.png">
+                    <img class="mx-auto" src="../assets/hazardous.png">
                   </v-card-title>
                 </v-img>
               </v-card>
@@ -73,7 +72,7 @@
                 >
 
                   <v-card-title class="white--text mt-8">
-                    <v-card-title class="white--text mt-n2">
+                    <v-card-title class="white--text mt-n2 mx-auto">
                       <img class="mx-auto" src="../assets/observations.png">
                     </v-card-title>
                   </v-card-title>
@@ -83,16 +82,13 @@
           </v-col>
         </v-row>
       </v-container>
-    <!-- </v-main> -->
   </v-app>
 </template>
 
 <script>
   export default {
     data: () => ({
-      links: [
 
-      ],
     })
   }
 </script>
