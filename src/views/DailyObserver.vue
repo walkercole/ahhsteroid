@@ -76,6 +76,9 @@
                 ></v-text-field>
             </td> 
           </template>
+          <template v-slot:item.nasa_jpl_url="{item}">
+            <a :href="item.nasa_jpl_url" target="_blank">{{ item.nasa_jpl_url }}</a>
+          </template>
 
         </v-data-table>
 
@@ -103,7 +106,7 @@ import key from '../config'
 import axios from 'axios'
 
 export default {
-  name: 'search',
+  name: 'daily-observer',
   components: {
     layout
   },

@@ -21,7 +21,7 @@
               rounded="lg"
               min-height="268"
             >
-              <v-card @click="$router.push({name: 'search'})">
+              <v-card @click="$router.push({name: 'daily-observer'})">
                 <v-img
                   height="268px"
                   src="https://cdn.pixabay.com/photo/2016/09/03/19/35/griffith-observatory-1642514_960_720.jpg"
@@ -43,7 +43,7 @@
               min-height="268"
               rounded="lg"
             >
-              <v-card @click="$router.push({name: 'about'})">
+              <v-card @click="$router.push({name: 'hazardous-asteroids'})">
                 <v-img
                   height="268px"
                   src="https://cdn.pixabay.com/photo/2017/01/31/13/40/dark-2024127_960_720.png"

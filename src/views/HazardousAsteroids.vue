@@ -262,7 +262,7 @@ import key from '../config'
 import axios from 'axios'
 
 export default {
-  name: 'about',
+  name: 'hazardous-asteroids',
   components: {
     layout
   },

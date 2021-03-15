@@ -8,7 +8,7 @@
       <v-spacer></v-spacer>
       <v-btn
         text
-        @click="$router.push({name: 'search'})"
+        @click="$router.push({name: 'daily-observer'})"
         target="_blank"
       >
         <span class="mr-2">Daily Observer</span>
@@ -17,7 +17,7 @@
 
       <v-btn
         text
-        @click="$router.push({name: 'about'})"
+        @click="$router.push({name: 'hazardous-asteroids'})"
         target="_blank"
       >
         <span class="mr-2">Hazardous asteroids</span>
